@@ -29,12 +29,12 @@ app.get("/nhansu", async (req, res) => {
   //Google sheets instance
   const googleSheetsInstance = google.sheets({ version: "v4", auth: authClientObject });
   //const spreadsheetId = "1QqZOCR23w6cGpC3Msi8yyg_4oNHmRSKiS-NSZJ5WZSY";
-  const spreadsheetId = "11LloC1oi5CzoLfng1FZBzTvF1l0SN6cW8aGZn4AjWijQ";
+  const spreadsheetId = "1LloC1oi5CzoLfng1FZBzTvF1l0SN6cW8aGZn4AjWijQ";
    //Read front the spreadsheet
     const readData = await googleSheetsInstance.spreadsheets.values.get({
         auth, //auth object
         spreadsheetId, // spreadsheet id
-        range: "sheet", //range of cells to read from.
+        range: "Sheet1", //range of cells to read from.
     })
 
     //send the data reae with the response
