@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const { google } = require("googleapis");
 const port = process.env.PORT || 3000;
@@ -6,41 +6,41 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 const auth = new google.auth.GoogleAuth({
-        keyFile: "keys.json", //the key file
-        //url to spreadsheets API
-        scopes: "https://www.googleapis.com/auth/spreadsheets", 
+  keyFile: "keys.json", //the key file
+  //url to spreadsheets API
+  scopes: "https://www.googleapis.com/auth/spreadsheets",
 });
 
-
-
-
-app.get("/", (req,res) => {
+app.get("/", (req, res) => {
   res.send("Hello world");
-})
+});
 
 app.get("/nhansu", async (req, res) => {
   const auth = new google.auth.GoogleAuth({
-        keyFile: "keys.json", //the key file
-        //url to spreadsheets API
-        scopes: "https://www.googleapis.com/auth/spreadsheets", 
-    });
- //Auth client Object
+    keyFile: "keys.json", //the key file
+    //url to spreadsheets API
+    scopes: "https://www.googleapis.com/auth/spreadsheets",
+  });
+  //Auth client Object
   const authClientObject = await auth.getClient();
   //Google sheets instance
-  const googleSheetsInstance = google.sheets({ version: "v4", auth: authClientObject });
+  const googleSheetsInstance = google.sheets({
+    version: "v4",
+    auth: authClientObject,
+  });
   //const spreadsheetId = "1QqZOCR23w6cGpC3Msi8yyg_4oNHmRSKiS-NSZJ5WZSY";
-  const spreadsheetId = "1LloC1oi5CzoLfng1FZBzTvF1l0SN6cW8aGZn4AjWijQ";
-   //Read front the spreadsheet
-    const readData = await googleSheetsInstance.spreadsheets.values.get({
-        auth, //auth object
-        spreadsheetId, // spreadsheet id
-        range: "Sheet1", //range of cells to read from.
-    })
+  const spreadsheetId = "1vBvPYCHsmGGgH9aOYuS3lG9SopNHTyHlWX3GpCmqljA";
+  //Read front the spreadsheet
+  const readData = await googleSheetsInstance.spreadsheets.values.get({
+    auth, //auth object
+    spreadsheetId, // spreadsheet id
+    range: "chamcong", //range of cells to read from.
+  });
 
-    //send the data reae with the response
-  res.send(readData.data)
-})
+  //send the data reae with the response
+  res.send(readData.data);
+});
 
 app.listen(port, () => {
   console.log(`App listening port ${port}`);
-})
+});
